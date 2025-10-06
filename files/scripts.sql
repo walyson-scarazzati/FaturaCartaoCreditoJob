@@ -1,24 +1,19 @@
 CREATE DATABASE IF NOT EXISTS spring_batch;
 CREATE DATABASE IF NOT EXISTS fatura_cartao_credito;
 
--- Create user for different host patterns to ensure connectivity
-CREATE USER IF NOT EXISTS 'fatura'@'%' IDENTIFIED BY '123456';
-CREATE USER IF NOT EXISTS 'fatura'@'localhost' IDENTIFIED BY '123456';
-CREATE USER IF NOT EXISTS 'fatura'@'172.%.%.%' IDENTIFIED BY '123456';
-
--- Grant privileges to all user variants
-GRANT ALL PRIVILEGES ON *.* TO 'fatura'@'%' WITH GRANT OPTION;
-GRANT ALL PRIVILEGES ON *.* TO 'fatura'@'localhost' WITH GRANT OPTION;
-GRANT ALL PRIVILEGES ON *.* TO 'fatura'@'172.%.%.%' WITH GRANT OPTION;
-
-FLUSH PRIVILEGES;
-
-
 drop table if exists cartao_credito;
 CREATE TABLE `cartao_credito` (
   `numero_cartao_credito` int NOT NULL,
   `cliente` int NOT NULL,
   PRIMARY KEY (`numero_cartao_credito`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+drop table if exists fatura;
+CREATE TABLE `fatura` (
+  `id` int NOT NULL AUTO_INCREMENT ,
+  `valor` double NOT NULL,
+  `data` date NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 drop table if exists transacao;
@@ -30,7 +25,6 @@ CREATE TABLE `transacao` (
   `data` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 INSERT INTO `cartao_credito` (`numero_cartao_credito`, `cliente`) VALUES (1500573, 1);
 INSERT INTO `cartao_credito` (`numero_cartao_credito`, `cliente`) VALUES (2811036, 2);
