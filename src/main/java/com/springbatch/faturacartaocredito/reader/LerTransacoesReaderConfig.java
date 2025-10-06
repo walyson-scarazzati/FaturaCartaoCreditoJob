@@ -26,6 +26,7 @@ public class LerTransacoesReaderConfig {
 				.dataSource(dataSource)
 				.sql("select * from transacao join cartao_credito using (numero_cartao_credito) order by numero_cartao_credito")
 				.rowMapper(rowMapperTransacao())
+				.saveState(false)
 				.build();
 	}
 

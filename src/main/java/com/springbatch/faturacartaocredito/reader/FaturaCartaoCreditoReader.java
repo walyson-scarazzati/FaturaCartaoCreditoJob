@@ -16,7 +16,7 @@ public class FaturaCartaoCreditoReader implements ItemStreamReader<FaturaCartaoC
 	}
 
 	@Override
-	public FaturaCartaoCredito read() throws Exception {
+	public synchronized FaturaCartaoCredito read() throws Exception {
 		if (transacaoAtual == null)
 			transacaoAtual = delegate.read();
 
@@ -46,17 +46,17 @@ public class FaturaCartaoCreditoReader implements ItemStreamReader<FaturaCartaoC
 	}
 
 	@Override
-	public void open(ExecutionContext executionContext) throws ItemStreamException {
+	public synchronized void open(ExecutionContext executionContext) throws ItemStreamException {
 		delegate.open(executionContext);
 	}
 
 	@Override
-	public void update(ExecutionContext executionContext) throws ItemStreamException {
+	public synchronized void update(ExecutionContext executionContext) throws ItemStreamException {
 		delegate.update(executionContext);
 	}
 
 	@Override
-	public void close() throws ItemStreamException {
+	public synchronized void close() throws ItemStreamException {
 		delegate.close();
 	}
 
